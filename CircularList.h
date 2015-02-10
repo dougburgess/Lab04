@@ -44,44 +44,44 @@ class CircularList : public Drawable
 };
 
 template < class T >
-DoubleNode<T>* CircularList<T>::find(int index) 
+DoubleNode<T>* CircularList<T>::find(int index)
 {
    DoubleNode<T>* where = loc;
    int min_dist;
-   int dist_prev;  //prev links (negative)
-   int dist_next;  //next links (positive)
+   int dist_prev;  // prev links (negative)
+   int dist_next;  // next links (positive)
 
    if (sze == 0)
    {
       return NULL;
    }
 
-   //DO THIS
-   //complete the distance calculations below
-   //loc_pos is the index that loc currently points to
-   //index is the requested index
- 
+   // DO THIS
+   // complete the distance calculations below
+   // loc_pos is the index that loc currently points to
+   // index is the requested index
+
    if (index >= loc_pos)
    {
-                                    //distance without the bridge (next refs, positive)
-                                    //distance using the bridge (prev refs, negative)
+                                    // distance without the bridge (next refs, positive)
+                                    // distance using the bridge (prev refs, negative)
    }
    else
    {
-                                    //distance without the bridge (prev refs, negative)
-                                    //distance using the bridge (next refs, positive)
+                                    // distance without the bridge (prev refs, negative)
+                                    // distance using the bridge (next refs, positive)
    }
 
-   //DO THIS which distance is smaller?
-   //find the minimum distance using absolute value
-   //set min_dist to the smaller value, keeping the sign
+   // DO THIS which distance is smaller?
+   // find the minimum distance using absolute value
+   // set min_dist to the smaller value, keeping the sign
 
 
 
 
 
 
-   if (min_dist < 0)  //negative distance means use prev links, counterclockwise
+   if (min_dist < 0)  // negative distance means use prev links, counterclockwise
    {
       for (int i = 1; i <= -1*min_dist; i++)
       {
@@ -89,7 +89,7 @@ DoubleNode<T>* CircularList<T>::find(int index)
          animateMovement(false, where);
       }
    }
-   else  //positive distance means use next links, clockwise
+   else  // positive distance means use next links, clockwise
    {
       for (int i = 1; i <= min_dist; i++)
       {
@@ -104,14 +104,14 @@ DoubleNode<T>* CircularList<T>::find(int index)
 template < class T >
 void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
 {
-   if (update_active)  //animate the movement of loc around the circular list
+   if (update_active)  // animate the movement of loc around the circular list
    {
       loc = where;
       if (!clockwise)
       {
-         //moving counterclockwise
+         // moving counterclockwise
          loc_pos--;
-         if (loc_pos == 0) 
+         if (loc_pos == 0)
          {
             loc_pos = sze;
          }
@@ -119,9 +119,9 @@ void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
 
       else
       {
-         //moving clockwise
+         // moving clockwise
          loc_pos++;
-         if (loc_pos == sze + 1) 
+         if (loc_pos == sze + 1)
          {
             loc_pos = 1;
          }
@@ -132,15 +132,15 @@ void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
 }
 
 template < class T >
-void CircularList<T>::remove(int index) 
+void CircularList<T>::remove(int index)
 {
-   //DO THIS
-   //remember to move loc and loc_pos to the location of the removal
-   //remember to delete the node after it has been removed from the list
-   if (index >= 1 && index <= sze) 
+   // DO THIS
+   // remember to move loc and loc_pos to the location of the removal
+   // remember to delete the node after it has been removed from the list
+   if (index >= 1 && index <= sze)
    {
 
-      if (sze == 1) //special case
+      if (sze == 1) // special case
       {
 
 
@@ -151,7 +151,7 @@ void CircularList<T>::remove(int index)
       }
       else
       {
-         //use local variables
+         // use local variables
 
 
 
@@ -160,22 +160,22 @@ void CircularList<T>::remove(int index)
 
       }
       sze--;
-   } 
+   }
 }
 
 template < class T >
 T* CircularList<T>::get(int index)
 {
    T* item = NULL;
-   if (index >= 1 && index <= sze) 
+   if (index >= 1 && index <= sze)
    {
       // get reference to node, then data in node
       DoubleNode<T>* where = find(index);
       T* item = where->getItem();
-      loc = where;  //stay at location of most recent activity
+      loc = where;  // stay at location of most recent activity
       loc_pos = index;
       return item;
-   } 
+   }
 }
 
 template < class T >
@@ -187,17 +187,17 @@ void CircularList<T>::add(T* item)
 template < class T >
 void CircularList<T>::add(int index, T* item)
 {
-   if (index >= 1 && index <= sze + 1) 
+   if (index >= 1 && index <= sze + 1)
    {
-      if (sze == 0) 
+      if (sze == 0)
       {
          DoubleNode<T>* node = new DoubleNode<T>(item);
          node->setNext(node);
          node->setPrev(node);
          loc = node;
          loc_pos = 1;
-      } 
-      else 
+      }
+      else
       {
          DoubleNode<T>* prev;
 
@@ -211,7 +211,7 @@ void CircularList<T>::add(int index, T* item)
          }
 
          DoubleNode<T>* curr = prev->getNext();
-         // insert the new node containing item after 
+         // insert the new node containing item after
          // the node that prev references
          DoubleNode<T>* node = new DoubleNode<T>(item);
          node->setPrev(prev);
@@ -221,14 +221,14 @@ void CircularList<T>::add(int index, T* item)
 
          loc = node;
          loc_pos = index;
-      } 
+      }
 
       sze++;
-   } 
+   }
 }
 
 template < class T >
-CircularList<T>::CircularList() 
+CircularList<T>::CircularList()
 {
    sze = 0;
    removeAll();
@@ -238,12 +238,12 @@ CircularList<T>::CircularList()
 }
 
 template < class T >
-void CircularList<T>::removeAll() 
+void CircularList<T>::removeAll()
 {
    if (sze > 0)
    {
       DoubleNode<T>* curr = find(1);
-      curr->getPrev()->setNext(NULL);  //break circular reference first
+      curr->getPrev()->setNext(NULL);  // break circular reference first
 
       // need to remove all previous links to prevent memory leak
       while (curr != NULL)
@@ -258,22 +258,22 @@ void CircularList<T>::removeAll()
    loc = NULL;
    loc_pos = 0;
    sze = 0;
-} 
+}
 
 template < class T >
-CircularList<T>::~CircularList() 
+CircularList<T>::~CircularList()
 {
    removeAll();
-} 
+}
 
 template < class T >
-bool CircularList<T>::isEmpty() 
+bool CircularList<T>::isEmpty()
 {
    return sze == 0;
-} 
+}
 
 template < class T >
-int CircularList<T>::size() 
+int CircularList<T>::size()
 {
    return sze;
 }
@@ -281,12 +281,12 @@ int CircularList<T>::size()
 template < class T >
 void CircularList<T>::set(int index, T* item)
 {
-   if (index >= 1 && index <= sze) 
+   if (index >= 1 && index <= sze)
    {
       loc = find(index);
       loc->setItem(item);
       loc_pos = index;
-   }    
+   }
 }
 
 template < class T >
@@ -305,20 +305,20 @@ void CircularList<T>::addListener(Update* g)
 template < class T >
 void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int height)
 {
-   update_active = 0;  //turn off painting inside the paint method
+   update_active = 0;  // turn off painting inside the paint method
 
    double sze = (double) this->sze;
-   //included so that the small circles will stay entirely on the panel (they have a radius too)
-   int offset = 10;  
+   // included so that the small circles will stay entirely on the panel (they have a radius too)
+   int offset = 10;
 
-   double angleIncr = 360.0/sze;  
+   double angleIncr = 360.0/sze;
    //the circle will start being drawn at the top of the panel
-   double angle = -90;  
-   double r1 = (double) (width - 2*offset)/2; 
+   double angle = -90;
+   double r1 = (double) (width - 2*offset)/2;
    double r2 = (double) (height - 2*offset)/2;
    double r;
-   //find the constraining dimension and use that for the radius
-   if (r1 < r2)  
+   // find the constraining dimension and use that for the radius
+   if (r1 < r2)
    {
       r = r1;
    }
@@ -327,7 +327,7 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
       r = r2;
    }
 
-   //starting positions-- start at the top of the panel, in the center (y increases downward)
+   // starting positions-- start at the top of the panel, in the center (y increases downward)
    double x = r + offset;
    double y = offset;
 
@@ -338,19 +338,19 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
    int xd = -1, yd = -1;
    int xbefore = -1, ybefore = -1;
 
-   //draw the lines
+   // draw the lines
    Line* line = new Line(new Color(0, 0, 0), 5);
    while(iter->hasNext())
    {
-       before = item;  //connect current node to the previously drawn node (if not the first node)
+       before = item;  // connect current node to the previously drawn node (if not the first node)
        item = iter->next();
-         
+
        xbefore = xd;
        ybefore = yd;
        xd = (int) x;
        yd = (int) y;
 
-       //connect the current node to the previously drawn node
+       // connect the current node to the previously drawn node
        if (before != NULL)
        {
           line->draw(cr, xbefore, ybefore, xd, yd);
@@ -358,13 +358,13 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
 
        angle = angle + angleIncr;
 
-       //update x and y
-       x = r*cos(angle*3.1415927/180) + (r + offset);  //move x and y to the center of the circle and then compute the distance to move from there (based on r and theta)
+       // update x and y
+       x = r*cos(angle*3.1415927/180) + (r + offset);  // move x and y to the center of the circle and then compute the distance to move from there (based on r and theta)
        y = r*sin(angle*3.1415927/180) + (r + offset);
    }
    delete iter;
 
-   //connect last node to the first node
+   // connect last node to the first node
    if (before != NULL)
    {
       line->draw(cr, xd, yd, (int) (r + offset), (int) offset);
@@ -373,15 +373,15 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
 
    iter = iterator();
 
-   //draw the circles
-   int radius = 20;  //the radius of the circles representing links
-   int count = 0;  //the node that loc points to (located at index loc_pos) needs to be painted blue rather than red
+   // draw the circles
+   int radius = 20;  // the radius of the circles representing links
+   int count = 0;  // the node that loc points to (located at index loc_pos) needs to be painted blue rather than red
    while(iter->hasNext())
    {
        item = iter->next();
 
        count++;
-       CSC2110::String* text = item->getKey();  
+       CSC2110::String* text = item->getKey();
        Circle* circle;
        if (count == loc_pos)
        {
@@ -391,8 +391,8 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
        {
           circle = new Circle(new Color(1, 0, 0), radius, text);
        }
-         
-       //draw the small circles
+
+       // draw the small circles
        xd = (int) x;
        yd = (int) y;
 
@@ -401,7 +401,7 @@ void CircularList<T>::draw(Cairo::RefPtr<Cairo::Context> cr, int width, int heig
 
        angle = angle + angleIncr;
 
-       //update x and y
+       // update x and y
        x = r*cos(angle*3.1415927/180) + r + offset;
        y = r*sin(angle*3.1415927/180) + r + offset;
    }
